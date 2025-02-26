@@ -1,25 +1,25 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
 from blog.models import Post
-
 
 # Create your views here.
 
 
 # 게시글 목록 보기
-def post_list(request):
+def post_list(request : HttpRequest)-> HttpResponse :
     posts = Post.objects.all().order_by("-created_at")
     return render(request, "blog/post_list.html", {"posts": posts})
 
 
 # 게시글 상세보기
-def post_detail(request, post_id):
+def post_detail(request : HttpRequest, post_id :int) -> HttpResponse:
     post = get_object_or_404(Post, id=post_id)
     return render(request, "blog/post_detail.html", {"post": post})
 
 
 # 게시글 작성
-def post_new(request):
+def post_new(request : HttpRequest) -> HttpResponse:
     if request.method == "POST":
         title = request.POST.get("title")
         content = request.POST.get("content")
@@ -29,7 +29,7 @@ def post_new(request):
 
 
 # 게시글 수정
-def post_edit(request, post_id):
+def post_edit(request : HttpRequest, post_id:int) -> HttpResponse:
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
         post.title = request.POST.get("title")
@@ -40,7 +40,7 @@ def post_edit(request, post_id):
 
 
 # 게시글 삭제
-def post_delete(request, post_id):
+def post_delete(request :HttpRequest, post_id:int) -> HttpResponse:
     post = get_object_or_404(Post, id=post_id)
     post.delete()
     return redirect("post_list")

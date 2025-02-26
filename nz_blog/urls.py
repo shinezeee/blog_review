@@ -16,10 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 import blog
-from blog.views import post_list, post_detail, post_new, post_edit, post_delete
+from blog.views import post_delete, post_detail, post_edit, post_list, post_new
 
 urlpatterns = [
     path("admin/", admin.site.urls),

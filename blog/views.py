@@ -33,8 +33,8 @@ def post_new(request):
 def post_edit(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
+        post.title = request.POST.get('title')
+        post.content = request.POST.get('content')
         post.save()
         return redirect('post_detail', post_id=post_id)
     return render(request,

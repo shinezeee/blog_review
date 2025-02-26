@@ -16,8 +16,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+import blog
+from blog.views import post_list, post_detail, post_new, post_edit, post_delete
 
 urlpatterns = [
-       path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("", include("blog.urls")),  # blog url 포함시키기
 ]

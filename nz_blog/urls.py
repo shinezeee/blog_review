@@ -22,6 +22,6 @@ import blog
 from blog.views import post_list, post_detail, post_new, post_edit, post_delete
 
 urlpatterns = [
-       path('admin/', admin.site.urls),
-       path('',include('blog.urls')),  # blog url 포함시키기
+    path("admin/", admin.site.urls),
+    path("", include("blog.urls")),  # blog url 포함시키기
 ]

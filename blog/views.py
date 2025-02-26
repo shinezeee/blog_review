@@ -21,8 +21,8 @@ def post_detail(request : HttpRequest, post_id :int) -> HttpResponse:
 # 게시글 작성
 def post_new(request : HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        title = request.POST.get("title")
-        content = request.POST.get("content")
+        title : str = request.POST.get("title","") # 기본 빈 문자열 추가
+        content : str = request.POST.get("content","")
         Post.objects.create(title=title, content=content)
         return redirect("post_list")
     return render(request, "blog/post_form.html")
@@ -32,8 +32,8 @@ def post_new(request : HttpRequest) -> HttpResponse:
 def post_edit(request : HttpRequest, post_id:int) -> HttpResponse:
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
-        post.title = request.POST.get("title")
-        post.content = request.POST.get("content")
+        post.title = request.POST.get("title",post.title) or post.title # None 방지
+        post.content = request.POST.get("content",post.content) or post.content # None 방지
         post.save()
         return redirect("post_detail", post_id=post_id)
     return render(request, "blog/post_form.html", {"post": post})

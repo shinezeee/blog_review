@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "nz_blog",
-    "like.apps.LikeConfig",
+    "blog",
+    "like",
 ]
 
 MIDDLEWARE = [

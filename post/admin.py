@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import Post
+from post.models import Post
 
 # Register your models here.
 
